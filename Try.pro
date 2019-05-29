@@ -26,13 +26,28 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    scriptwindow.cpp \
+    galeryorimage.cpp \
+    newgalery.cpp \
+    nuevaFoto.cpp \
+    newphoto.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    scriptwindow.h \
+    galeryorimage.h \
+    newgalery.h \
+    nuevaFoto.h \
+    newphoto.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    scriptwindow.ui \
+    galeryorimage.ui \
+    newgalery.ui \
+    nuevaFoto.ui \
+    newphoto.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -5,6 +5,8 @@
 #include <QtCore>
 #include <QtGui>
 #include <QTreeWidgetItem>
+#include "galeryorimage.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +19,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery);
+    void newGalery(QTreeWidgetItem *item, QString nombre);
+    GaleryorImage gi;
+
+    void fillTable(QString name, QString autor, QString date, QString lenght, QString description);
+
 
 private slots:
 
@@ -25,6 +33,10 @@ private slots:
 
 
     void on_tableWidget_cellActivated(int row, int column);
+
+    void on_scriptButton_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;
