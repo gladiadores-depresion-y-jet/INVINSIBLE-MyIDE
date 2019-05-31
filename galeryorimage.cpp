@@ -18,6 +18,7 @@ void GaleryorImage::on_FotoBoton_clicked()
 
     nf.setModal(true);
     nf.exec();
+    //nf.clear();
     choice = true;
     close();
 
@@ -46,6 +47,7 @@ void GaleryorImage::on_GaleriaBoton_clicked()
 {
     nG.setModal(true);
     nG.exec();
+    nG.directory();
     choice = false;
     close();
 
@@ -58,4 +60,7 @@ bool GaleryorImage::eleccion(){
 
 QString GaleryorImage::getNameG(){
     return nG.getName();
+}
+QList<QString> GaleryorImage::getList(){
+    return nG.getList();
 }

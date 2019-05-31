@@ -22,10 +22,12 @@ public:
     QString getDescripP();
     QString getNameG();
     QString getGaleryP();
+
+    QList<QString> list;
     newGalery nG;
     newphoto nf;
     bool choice;
-
+    QList<QString> getList();
     bool eleccion();
 
 private slots:

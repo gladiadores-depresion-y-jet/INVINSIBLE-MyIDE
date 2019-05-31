@@ -30,7 +30,6 @@ SOURCES += \
     scriptwindow.cpp \
     galeryorimage.cpp \
     newgalery.cpp \
-    nuevaFoto.cpp \
     newphoto.cpp
 
 HEADERS += \
@@ -38,7 +37,6 @@ HEADERS += \
     scriptwindow.h \
     galeryorimage.h \
     newgalery.h \
-    nuevaFoto.h \
     newphoto.h
 
 FORMS += \
@@ -46,7 +44,6 @@ FORMS += \
     scriptwindow.ui \
     galeryorimage.ui \
     newgalery.ui \
-    nuevaFoto.ui \
     newphoto.ui
 
 # Default rules for deployment.

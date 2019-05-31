@@ -14,8 +14,12 @@ class newGalery : public QDialog
 public:
     explicit newGalery(QWidget *parent = nullptr);
     ~newGalery();
+    QString galeryName;
     QString getName();
+    void directory();
 
+    QList<QString> list;
+    QList<QString> getList();
 
 
 

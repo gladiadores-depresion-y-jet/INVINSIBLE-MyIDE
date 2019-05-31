@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <QTreeWidgetItem>
 #include "galeryorimage.h"
+#include "newphoto.h"
 
 
 namespace Ui {
@@ -22,6 +23,7 @@ public:
     void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery);
     void newGalery(QTreeWidgetItem *item, QString nombre);
     GaleryorImage gi;
+    newphoto np;
 
     void fillTable(QString name, QString autor, QString date, QString lenght, QString description);
 

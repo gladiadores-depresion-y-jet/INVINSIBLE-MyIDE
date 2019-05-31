@@ -23,7 +23,8 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
     ui->treeWidget->findItems("Galeria 1",Qt::MatchExactly);
 
     if(column == 0){
-
+        qDebug() << item->text(0);
+        //hacer request al server para desplejar informacion
         if(item->text(0)=="Foto 1"){
             ui->tableWidget->setItem(0, 0, new QTableWidgetItem("Foto1"));
             ui->tableWidget->setItem(0, 1, new QTableWidgetItem("Camacho el sabroso"));
@@ -38,15 +39,14 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
             gi.setModal(true); //abre ventana de eleccion
             gi.exec();
             if(gi.eleccion()){
-                qDebug("1");
+
                 QString nombreFoto = gi.getNombreP();
                 QString nombreGaleria = gi.getGaleryP();
                 newPhoto(item, nombreFoto, nombreGaleria); //add a new child of DATABASE
-            }else{
-                QString nombreGalery = gi.getNameG();
-                newGalery(item,nombreGalery);
-            }
 
+            }else{
+                newGalery(item, gi.getNameG());
+            }
         }
     }
 }
@@ -57,15 +57,14 @@ void MainWindow::newPhoto(QTreeWidgetItem *item, QString nombre, QString galery)
             QTreeWidgetItem *itm = new QTreeWidgetItem(item->child(i));
             itm->setText(0, nombre);
             ui->treeWidget->addTopLevelItem(itm);
+            fillTable(gi.getNombreP(),gi.getAutorP(),gi.getAnoP(),gi.getTamanoP(),gi.getDescripP());
             break;
         }
     }
-    fillTable(gi.getNombreP(),gi.getAutorP(),gi.getAnoP(),gi.getTamanoP(),gi.getDescripP());
-    qDebug("MAMAMOS");
-
 }
 
 void MainWindow:: fillTable(QString name, QString autor, QString date, QString lenght, QString description){
+    //hacer modificacion para que el server mande la info
     ui->tableWidget->setItem(0, 0, new QTableWidgetItem(name));
     ui->tableWidget->setItem(0, 1, new QTableWidgetItem(autor));
     ui->tableWidget->setItem(0, 2, new QTableWidgetItem(date));
@@ -74,13 +73,23 @@ void MainWindow:: fillTable(QString name, QString autor, QString date, QString l
 }
 
 void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
-    QTreeWidgetItem *itm = new QTreeWidgetItem(item); //por cada galeria creada asignarle un index para meterlo aqui
+    QTreeWidgetItem *itm = new QTreeWidgetItem(item);
     itm->setText(0, nombre);
     ui->treeWidget->addTopLevelItem(itm);
+    QList<QString> list = gi.getList();
+    list.removeFirst();
+    list.removeFirst();
+    int lenght = list.length();
+    for(int i = 0; i < lenght; i++){
+
+        newPhoto(item,list.first(),nombre);
+        list.removeFirst();
+        qDebug() << list ;
+    }
+
+
 
 }
-
-
 void MainWindow::on_scriptButton_clicked()
 {
     scriptwindow sw;

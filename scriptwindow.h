@@ -15,6 +15,9 @@ public:
     explicit scriptwindow(QWidget *parent = nullptr);
     ~scriptwindow();
 
+private slots:
+    void on_doneButton_clicked();
+
 private:
     Ui::scriptwindow *ui;
 };

@@ -20,11 +20,14 @@ public:
     QString getTamano();
     QString getDescrip();
     QString getGalery();
+    void clear();
 
 private slots:
     void on_ImagenBoton_clicked();
 
     void on_doneBoton_clicked();
+
+
 
 private:
     Ui::newphoto *ui;
