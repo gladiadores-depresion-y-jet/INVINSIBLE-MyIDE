@@ -21,19 +21,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     ui->treeWidget->findItems("Galeria 1",Qt::MatchExactly);
-
+    ui->tableWidget->setRowCount(0);
     if(column == 0){
         qDebug() << item->text(0);
         //hacer request al server para desplejar informacion
 
 
-        if(item->text(0)=="Foto 1"){
-            ui->tableWidget->setItem(0, 0, new QTableWidgetItem("Foto1"));
-            ui->tableWidget->setItem(0, 1, new QTableWidgetItem("Camacho el sabroso"));
-            ui->tableWidget->setItem(0, 2, new QTableWidgetItem("6969"));
-            ui->tableWidget->setItem(0, 3, new QTableWidgetItem("20cm de sabor"));
-            ui->tableWidget->setItem(0, 4, new QTableWidgetItem("Chupo y mamo, DABID me llamo"));
-        }
         //print the name of the item in column 0
         //We only have 1 column
         if(item->text(0)=="DataBase"){
@@ -54,16 +47,22 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
                 qDebug()<<"ZS-miedo";
             }else{
                 int hijos = item->childCount();
+                ui->tableWidget->setRowCount(hijos);
+
+                QList<QString> list = gi.getList();
+                list.removeFirst();
+                list.removeFirst();
 
                 for(int i = 0; i < hijos; i++){
-                    qDebug()<<hijos;
-                    ui->tableWidget->insertRow(i+1); //inserta 1 fila
+                    //ui->tableWidget->insertRow(i); //inserta 1 fila
+                    ui->tableWidget->setItem(i, 0, new QTableWidgetItem(list.at(i)));
                 }
-                ui->tableWidget->setItem(1, 0, new QTableWidgetItem("terror"));
+
                 //meter los valores de la metada de las canciones
+
             }
         }
-        }
+    }
 
 
 }
