@@ -25,6 +25,8 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
     if(column == 0){
         qDebug() << item->text(0);
         //hacer request al server para desplejar informacion
+
+
         if(item->text(0)=="Foto 1"){
             ui->tableWidget->setItem(0, 0, new QTableWidgetItem("Foto1"));
             ui->tableWidget->setItem(0, 1, new QTableWidgetItem("Camacho el sabroso"));
@@ -47,8 +49,23 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
             }else{
                 newGalery(item, gi.getNameG());
             }
+        }else{
+            if(item->child(0) == nullptr){ //=> Galeria esta vacia o es una foto
+                qDebug()<<"ZS-miedo";
+            }else{
+                int hijos = item->childCount();
+
+                for(int i = 0; i < hijos; i++){
+                    qDebug()<<hijos;
+                    ui->tableWidget->insertRow(i+1); //inserta 1 fila
+                }
+                ui->tableWidget->setItem(1, 0, new QTableWidgetItem("terror"));
+                //meter los valores de la metada de las canciones
+            }
         }
-    }
+        }
+
+
 }
 
 void MainWindow::newPhoto(QTreeWidgetItem *item, QString nombre, QString galery){

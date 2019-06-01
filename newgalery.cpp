@@ -23,10 +23,7 @@ void newGalery::on_doneBoton_clicked()
 
 void newGalery::directory(){
     list.clear();
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-                                                 "/home",
-                                                 QFileDialog::ShowDirsOnly
-                                                 | QFileDialog::DontResolveSymlinks);
+    QString dir = QFileDialog::getExistingDirectory(this, ("Select Output Folder"), QDir::currentPath());
 
     QFileInfo fi(dir);
     galeryName = fi.fileName();
@@ -35,7 +32,7 @@ void newGalery::directory(){
     foreach (QFileInfo myInfo, myDir.entryInfoList()) {
         //access to the name of a image file
         list.append(myInfo.fileName());
-        qDebug() << list;
+        //qDebug() << list;
 
     }
 }

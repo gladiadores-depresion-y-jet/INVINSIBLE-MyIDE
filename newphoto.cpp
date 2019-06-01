@@ -29,6 +29,9 @@ void newphoto::on_ImagenBoton_clicked()
     QPixmap pix(filename);
     ui->fotolabel->setPixmap(pix.scaled(350,350,Qt::KeepAspectRatio));
 
+    //METADATA
+
+
     // Preparation of our QPixmap
     QByteArray bArray;
     QBuffer buffer(&bArray);
