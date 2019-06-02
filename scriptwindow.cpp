@@ -1,8 +1,5 @@
 #include "scriptwindow.h"
 #include "ui_scriptwindow.h"
-#include<QDebug>
-#include "QMessageBox"
-
 
 scriptwindow::scriptwindow(QWidget *parent) :
     QDialog(parent),

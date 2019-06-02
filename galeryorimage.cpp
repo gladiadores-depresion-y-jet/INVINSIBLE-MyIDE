@@ -1,5 +1,6 @@
 #include "galeryorimage.h"
 #include "ui_galeryorimage.h"
+
 GaleryorImage::GaleryorImage(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GaleryorImage)
@@ -13,14 +14,21 @@ GaleryorImage::~GaleryorImage()
     delete ui;
 }
 
+/**
+  metodo para agregar nueva image
+ * @brief GaleryorImage::on_FotoBoton_clicked
+ */
 void GaleryorImage::on_FotoBoton_clicked()
 {
+    if(!nG.getList().isEmpty()){ //lista para ver si hay una galeria
+        nf.setModal(true);
+        nf.exec();
+        choice = true; //boolenado para ver que opcion se tomo
+        close();
+    }else{
+        QMessageBox::critical(this,tr("ERROR"),tr("No hay Galeria creada")); //ventana emergente
 
-    nf.setModal(true);
-    nf.exec();
-    //nf.clear();
-    choice = true;
-    close();
+    }
 
 }
 
@@ -45,8 +53,8 @@ QString GaleryorImage:: getGaleryP(){
 
 void GaleryorImage::on_GaleriaBoton_clicked()
 {
-    nG.setModal(true);
-    nG.exec();
+    //nG.setModal(true);
+    //nG.exec();
     nG.directory();
     choice = false;
     close();
@@ -55,7 +63,6 @@ void GaleryorImage::on_GaleriaBoton_clicked()
 
 bool GaleryorImage::eleccion(){
     return choice;
-
 }
 
 QString GaleryorImage::getNameG(){

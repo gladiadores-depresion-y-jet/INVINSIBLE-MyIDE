@@ -5,8 +5,10 @@
 #include <QtCore>
 #include <QtGui>
 #include <QTreeWidgetItem>
-#include "galeryorimage.h"
-#include "newphoto.h"
+#include <galeryorimage.h>
+#include <newphoto.h>
+#include <QDebug>
+#include <scriptwindow.h>
 
 
 namespace Ui {
@@ -25,20 +27,11 @@ public:
     GaleryorImage gi;
     newphoto np;
 
-    void fillTable(QString name, QString autor, QString date, QString lenght, QString description);
-
-
 private slots:
-
     void on_treeWidget_expanded(const QModelIndex &index);
     void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
-
-
     void on_tableWidget_cellActivated(int row, int column);
-
     void on_scriptButton_clicked();
-
-
 
 private:
     Ui::MainWindow *ui;

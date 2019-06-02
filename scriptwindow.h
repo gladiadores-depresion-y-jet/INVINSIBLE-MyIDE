@@ -2,6 +2,8 @@
 #define SCRIPTWINDOW_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QMessageBox>
 
 namespace Ui {
 class scriptwindow;

@@ -134,29 +134,6 @@
          <property name="text">
           <string/>
          </property>
-         <item>
-          <property name="text">
-           <string>Galeria1</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Foto 1</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </item>
-         </item>
-         <item>
-          <property name="text">
-           <string>Galeria 2</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Galeria 3</string>
-          </property>
-         </item>
         </item>
        </widget>
       </widget>

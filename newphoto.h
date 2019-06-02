@@ -2,6 +2,12 @@
 #define NEWPHOTO_H
 
 #include <QDialog>
+#include <newgalery.h>
+#include <QFileDialog>
+#include <QPixmap>
+#include <QMessageBox>
+#include <QBuffer>
+#include <QDebug>
 
 namespace Ui {
 class newphoto;
@@ -20,14 +26,13 @@ public:
     QString getTamano();
     QString getDescrip();
     QString getGalery();
-    void clear();
+
+    QList<QString> list;
+    newGalery nG;
 
 private slots:
     void on_ImagenBoton_clicked();
-
     void on_doneBoton_clicked();
-
-
 
 private:
     Ui::newphoto *ui;

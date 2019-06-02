@@ -2,8 +2,10 @@
 #define GALERYORIMAGE_H
 
 #include <QDialog>
-#include "newphoto.h"
-#include "newgalery.h"
+#include <newphoto.h>
+#include <newgalery.h>
+#include <QDebug>
+#include <QMessageBox>
 namespace Ui {
 class GaleryorImage;
 }
@@ -22,17 +24,16 @@ public:
     QString getDescripP();
     QString getNameG();
     QString getGaleryP();
+    QList<QString> getList();
 
     QList<QString> list;
     newGalery nG;
     newphoto nf;
     bool choice;
-    QList<QString> getList();
     bool eleccion();
 
 private slots:
     void on_FotoBoton_clicked();
-
     void on_GaleriaBoton_clicked();
 
 private:

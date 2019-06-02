@@ -1,9 +1,6 @@
 #include "newgalery.h"
 #include "ui_newgalery.h"
 
-#include <qfiledialog.h>
-#include "QDebug"
-
 newGalery::newGalery(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::newGalery)
@@ -22,26 +19,23 @@ void newGalery::on_doneBoton_clicked()
 }
 
 void newGalery::directory(){
-    list.clear();
+    list.clear(); //lista nueva
     QString dir = QFileDialog::getExistingDirectory(this, ("Select Output Folder"), QDir::currentPath());
-
     QFileInfo fi(dir);
     galeryName = fi.fileName();
     qDebug() << galeryName; //name of the folder/galery
     QDir myDir(dir);
     foreach (QFileInfo myInfo, myDir.entryInfoList()) {
-        //access to the name of a image file
+        //access to the name of every image file
         list.append(myInfo.fileName());
-        //qDebug() << list;
-
     }
 }
+
 QList<QString> newGalery::getList(){
     return list;
 }
 
 QString newGalery::getName(){
-    //QString nameGalery = ui->nameText->text();
     return galeryName;
 }
 

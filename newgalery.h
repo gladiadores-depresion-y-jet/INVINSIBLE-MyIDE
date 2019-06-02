@@ -2,6 +2,8 @@
 #define NEWGALERY_H
 
 #include <QDialog>
+#include <qfiledialog.h>
+#include <QDebug>
 
 namespace Ui {
 class newGalery;
