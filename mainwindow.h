@@ -9,7 +9,12 @@
 #include <newphoto.h>
 #include <QDebug>
 #include <scriptwindow.h>
+#include <jsonmanager.h>
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
+using boost::property_tree::ptree;
 
 namespace Ui {
 class MainWindow;
@@ -24,8 +29,12 @@ public:
     ~MainWindow();
     void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery);
     void newGalery(QTreeWidgetItem *item, QString nombre);
+    void load(string Json);
+
+    jsonmanager jm;
     GaleryorImage gi;
     newphoto np;
+    ptree p;
 
 private slots:
     void on_treeWidget_expanded(const QModelIndex &index);

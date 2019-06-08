@@ -26,6 +26,7 @@ public:
     QString getGaleryP();
     QList<QString> getList();
 
+
     QList<QString> list;
     newGalery nG;
     newphoto nf;

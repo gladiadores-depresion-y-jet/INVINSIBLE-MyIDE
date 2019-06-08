@@ -24,20 +24,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+
+INCLUDEPATH += /usr/include/boost
+
+LIBS += -L/usr/include/boost -lboost_system
+
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
     scriptwindow.cpp \
     galeryorimage.cpp \
     newgalery.cpp \
-    newphoto.cpp
+    newphoto.cpp \
+    jsonmanager.cpp
 
 HEADERS += \
         mainwindow.h \
     scriptwindow.h \
     galeryorimage.h \
     newgalery.h \
-    newphoto.h
+    newphoto.h \
+    jsonmanager.h
 
 FORMS += \
         mainwindow.ui \

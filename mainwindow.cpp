@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <boost/asio.hpp>
+#include <boost/bind.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -90,6 +92,28 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
         //qDebug() << list ;
     }
 }
+
+void MainWindow::load(string Json){
+    ptree json = jm.stringToPtree(Json);
+    int num = json.get<int>("NUM");
+    for(int i = 0; i < num; i++){
+        ptree jsonGalery = jm.stringToPtree(json.get<string>("Galery"+i));
+        string nodeName = jsonGalery.get<string>("Name"); //Galery's name
+      //  newGalery(item, nodeName);
+
+        int numImages = jsonGalery.get<int>("NumImages");
+        for(int j = 0 ; j<numImages ; j++){
+            ptree jsonImage = jm.stringToPtree(jsonGalery.get<string>("Image"+j));
+            string name = jsonImage.get<string>("name");
+
+        //    newPhoto(item, name, nodeName); //add a new child of DATABASE
+
+        }
+    }
+
+}
+
+
 void MainWindow::on_scriptButton_clicked()
 {
     scriptwindow sw;
