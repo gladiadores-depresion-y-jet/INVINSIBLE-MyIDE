@@ -9,7 +9,7 @@
 #include <newphoto.h>
 #include <QDebug>
 #include <scriptwindow.h>
-
+#include <jsonmanager.h>
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +24,9 @@ public:
     ~MainWindow();
     void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery);
     void newGalery(QTreeWidgetItem *item, QString nombre);
+    void load(QString json);
+
+    jsonmanager jm;
     GaleryorImage gi;
     newphoto np;
 

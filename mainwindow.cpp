@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -56,8 +58,8 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
                     //inserta 1 fila
                     //QString wila = item->child(i)->text(0); delete
                     ui->tableWidget->setItem(i, 0, new QTableWidgetItem(item->child(i)->text(0))); //agarra los hijos del arbol y los pone en la tabla
+
                     //este paso se tiene que hacer desde la metadata que envia el server
-                    //puede que en newgalery haya una lista que ya no se ese utilizando
                 }
                 //meter los valores de la metada de las canciones
             }
@@ -80,7 +82,10 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
     QTreeWidgetItem *itm = new QTreeWidgetItem(item);
     itm->setText(0, nombre);
     ui->treeWidget->addTopLevelItem(itm);
-    QList<QString> list = gi.getList();
+
+
+
+  /*  QList<QString> list = gi.getList();
     list.removeFirst();
     list.removeFirst(); //delete two trash elements from list
     int lenght = list.length();
@@ -88,8 +93,29 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
         newPhoto(item,list.first(),nombre);
         list.removeFirst();
         //qDebug() << list ;
-    }
+    }*/
 }
+
+void MainWindow::load(QString Json){
+    ptree json = jm.stringToPtree(Json);
+    int num = json.get<int>("NUM");
+    for(int i = 0; i < num; i++){
+        ptree jsonGalery = jm.stringToPtree(json.get<QString>("Galery"+i));
+        QString nodeName = jsonGalery.get<QString>("Name"); //Galery's name
+      //  newGalery(item, nodeName);
+
+        int numImages = jsonGalery.get<int>("NumImages");
+        for(int j = 0 ; j<numImages ; j++){
+            ptree jsonImage = jm.stringToPtree(jsonGalery.get<QString>("Image"+j));
+            QString name = jsonImage.get<QString>("name");
+
+        //    newPhoto(item, name, nodeName); //add a new child of DATABASE
+
+        }
+    }
+
+}
+
 void MainWindow::on_scriptButton_clicked()
 {
     scriptwindow sw;

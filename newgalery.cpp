@@ -15,7 +15,11 @@ newGalery::~newGalery()
 
 void newGalery::on_doneBoton_clicked()
 {
-    close();
+    if(ui->nameText->text() == ""){
+        QMessageBox::critical(this,tr("ERROR"),tr("No hay Galeria creada")); //ventana emergente
+    }else{
+        close();
+    }
 }
 
 void newGalery::directory(){
@@ -36,7 +40,8 @@ QList<QString> newGalery::getList(){
 }
 
 QString newGalery::getName(){
-    return galeryName;
+    list.append(ui->nameText->text());
+    return ui->nameText->text();
 }
 
 

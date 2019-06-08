@@ -24,20 +24,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+DEPENDPATH += ../../libsrc/gsl/gsl-win-1.8
+DEPENDPATH += ../../libsrc/gsl/gsl-win-1.8/lib
+INCLUDEPATH += ../../libsrc/gsl/gsl-win-1.8/include
+
+LIBS += -L../../libsrc/gsl/gsl-win-1.8/lib
+LIBS += -L../../libsrc/gsl/gsl-win-1.8/bin
+LIBS += -llibgsl
+LIBS += -llibgslcblas
+
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
     scriptwindow.cpp \
     galeryorimage.cpp \
     newgalery.cpp \
-    newphoto.cpp
+    newphoto.cpp \
+    jsonmanager.cpp
 
 HEADERS += \
         mainwindow.h \
     scriptwindow.h \
     galeryorimage.h \
     newgalery.h \
-    newphoto.h
+    newphoto.h \
+    jsonmanager.h
 
 FORMS += \
         mainwindow.ui \
