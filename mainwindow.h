@@ -10,11 +10,12 @@
 #include <QDebug>
 #include <scriptwindow.h>
 #include <jsonmanager.h>
-
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
 using boost::property_tree::ptree;
+
+
 
 namespace Ui {
 class MainWindow;

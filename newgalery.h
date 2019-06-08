@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <qfiledialog.h>
 #include <QDebug>
+#include <QMessageBox>
 
 namespace Ui {
 class newGalery;

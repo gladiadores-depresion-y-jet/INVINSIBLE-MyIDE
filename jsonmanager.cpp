@@ -1,6 +1,5 @@
 #include "jsonmanager.h"
-#include <boost/asio.hpp>
-#include <boost/bind.hpp>
+
 
 ptree jsonmanager::stringToPtree(string s)
 {
@@ -11,7 +10,9 @@ ptree jsonmanager::stringToPtree(string s)
 }
 
 string jsonmanager::ptreeToString(ptree pt) {
+
     std::ostringstream oss;
     write_json(oss, pt);
     return oss.str();
 }
+

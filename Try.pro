@@ -24,10 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
-
-INCLUDEPATH += /usr/include/boost
-
-LIBS += -L/usr/include/boost -lboost_system
+LIBS += \
+       -lboost_system\
 
 SOURCES += \
         main.cpp \
