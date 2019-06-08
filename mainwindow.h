@@ -28,14 +28,24 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery);
+    void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery, int code);
     void newGalery(QTreeWidgetItem *item, QString nombre);
-    void load(string Json);
+    void load(string Json, QTreeWidgetItem *item);
 
     jsonmanager jm;
     GaleryorImage gi;
     newphoto np;
-    ptree p;
+
+    bool updated = false;
+    ptree prueba;
+    ptree Galery;
+    ptree ima1;
+    ptree ima2;
+    jsonmanager jsonM = jsonmanager();
+
+
+
+
 
 private slots:
     void on_treeWidget_expanded(const QModelIndex &index);
