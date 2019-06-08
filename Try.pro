@@ -24,14 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
-DEPENDPATH += ../../libsrc/gsl/gsl-win-1.8
-DEPENDPATH += ../../libsrc/gsl/gsl-win-1.8/lib
-INCLUDEPATH += ../../libsrc/gsl/gsl-win-1.8/include
 
-LIBS += -L../../libsrc/gsl/gsl-win-1.8/lib
-LIBS += -L../../libsrc/gsl/gsl-win-1.8/bin
-LIBS += -llibgsl
-LIBS += -llibgslcblas
+    LIBS += -L"c:/boost_1_47_0/stagegcc/lib/"
+    INCLUDEPATH += c:/boost_1_47_0/
+    DEPENDPATH += c:/boost_1_47_0/
 
 SOURCES += \
         main.cpp \

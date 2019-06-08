@@ -10,6 +10,10 @@
 #include <QDebug>
 #include <scriptwindow.h>
 #include <jsonmanager.h>
+#include <boost/asio.hpp>
+#include <boost/bind.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 namespace Ui {
 class MainWindow;
