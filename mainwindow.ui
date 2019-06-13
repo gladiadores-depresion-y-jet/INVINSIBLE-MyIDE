@@ -20,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MyDRC</string>
+   <string>Main Menu</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -51,7 +51,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>DRC = Daniel Rico Camacho</string>
+         <string/>
         </property>
        </widget>
        <widget class="QTreeWidget" name="treeWidget">
@@ -153,7 +153,7 @@
      <item>
       <widget class="QTableWidget" name="tableWidget">
        <attribute name="horizontalHeaderVisible">
-        <bool>true</bool>
+        <bool>false</bool>
        </attribute>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
@@ -238,7 +238,7 @@
      <x>0</x>
      <y>0</y>
      <width>1113</width>
-     <height>22</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

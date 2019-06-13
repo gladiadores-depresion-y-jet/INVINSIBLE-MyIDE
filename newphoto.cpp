@@ -40,8 +40,6 @@ void newphoto::on_doneBoton_clicked()
 {
     if(ui->nombreText->text() != "" && ui->autorText->text() != "" && ui->anoText->text() != "" && ui->tamanoText->text() != "" && ui->descripcionText->text() != "" && ui->galeriaText->text() != ""){
         //mandar metadata
-
-        qDebug("ak1000");   //exit button @@@BUG@@@
         close();
     }else{
         QMessageBox::critical(this,tr("ERROR"),tr("Falta dato")); //ventana emergente

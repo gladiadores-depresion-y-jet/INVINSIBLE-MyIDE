@@ -70,7 +70,6 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 
                     //este paso se tiene que hacer desde la metadata que envia el server
                 }
-                //meter los valores de la metada de las canciones
             }
         }
     }
@@ -94,23 +93,15 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
     QTreeWidgetItem *itm = new QTreeWidgetItem(item);
     itm->setText(0, nombre);
     ui->treeWidget->addTopLevelItem(itm);
-
-
-
-  /*  QList<QString> list = gi.getList();
-    list.removeFirst();
-    list.removeFirst(); //delete two trash elements from list
-    int lenght = list.length();
-    for(int i = 0; i < lenght; i++){
-        newPhoto(item,list.first(),nombre);
-        list.removeFirst();
-        //qDebug() << list ;
-    }*/
 }
 
 
 
 void MainWindow::load(string Json, QTreeWidgetItem *item){
+    /*
+     * Json de Garza
+*/
+
     ima1.put("name","sing");
     ima1.put("author","GARZA");
     ima1.put("year","2019");
@@ -136,9 +127,6 @@ void MainWindow::load(string Json, QTreeWidgetItem *item){
     string valor = jsonM.ptreeToString(prueba);
     QString qstr = QString::fromStdString(valor); //string to Qstring
     qDebug()<<qstr;
-
-
-
 
     ptree json = jm.stringToPtree(valor);
     int num = json.get<int>("NUM");

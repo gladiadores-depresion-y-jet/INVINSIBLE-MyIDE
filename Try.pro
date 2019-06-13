@@ -34,7 +34,8 @@ SOURCES += \
     galeryorimage.cpp \
     newgalery.cpp \
     newphoto.cpp \
-    jsonmanager.cpp
+    jsonmanager.cpp \
+    requests.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,9 @@ HEADERS += \
     galeryorimage.h \
     newgalery.h \
     newphoto.h \
-    jsonmanager.h
+    jsonmanager.h \
+    requests.h \
+    resourceofrequest.h
 
 FORMS += \
         mainwindow.ui \
