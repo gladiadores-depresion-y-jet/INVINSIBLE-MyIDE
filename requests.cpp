@@ -3,6 +3,7 @@
 //
 
 #include "requests.h"
+#include <QDebug>
 
 Requests::Requests(std::string &ipAddress, std::string &port) {
     this->ipAddress = &ipAddress;
@@ -52,6 +53,7 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &this->readBuffer);
 
         // Perform the request, res will get the return code
+        qDebug() << "se va a enviar request ";
         this->res = curl_easy_perform(this->curl);
         std::cout << this->readBuffer << std::endl;
         /* Check for errors */

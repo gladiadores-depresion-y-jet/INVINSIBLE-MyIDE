@@ -19,5 +19,5 @@ string jsonmanager::ptreeToString(ptree pt) {
 void jsonmanager::printJson(ptree const& pt) {
     ostringstream oss;
     write_json(oss, pt);
-    cout<<oss.str()<<endl;
+    //cout<<oss.str()<<endl;
 }

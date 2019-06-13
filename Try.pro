@@ -24,8 +24,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+
 LIBS += \
        -lboost_system\
+
+LIBS += -lcurl
+
+INCLUDEPATH''= /client
+LIBS+= -L/client/debug -fident
+
+INCLUDEPATH''= ../nlohmann
+LIBS+= -L../nlohmann/debug -fident
+
+INCLUDEPATH''= ../client
+LIBS+= -L../synthaxParser/debug -fident
 
 SOURCES += \
         main.cpp \
@@ -35,7 +47,8 @@ SOURCES += \
     newgalery.cpp \
     newphoto.cpp \
     jsonmanager.cpp \
-    requests.cpp
+    requests.cpp \
+    synthaxParser/Parser.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +58,9 @@ HEADERS += \
     newphoto.h \
     jsonmanager.h \
     requests.h \
-    resourceofrequest.h
+    resourceofrequest.h \
+
+    synthaxParser/Parser.h
 
 FORMS += \
         mainwindow.ui \
@@ -58,3 +73,5 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+

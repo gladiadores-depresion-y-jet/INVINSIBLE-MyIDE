@@ -8,6 +8,8 @@
 #include <QMessageBox>
 #include <QBuffer>
 #include <QDebug>
+#include <fstream>
+#include <iostream>
 
 namespace Ui {
 class newphoto;

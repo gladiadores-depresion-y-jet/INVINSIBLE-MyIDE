@@ -4,6 +4,13 @@
 #include <QDialog>
 #include <QDebug>
 #include <QMessageBox>
+#include <client/Requests.h>
+#include <synthaxParser/Parser.h>
+#include <nlohmann/json.hpp>
+#include <QFileDialog>
+#include <fstream>
+#include <iostream>
+
 
 namespace Ui {
 class scriptwindow;
