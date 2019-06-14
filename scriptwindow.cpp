@@ -19,13 +19,14 @@ void scriptwindow::on_doneButton_clicked()
     QString allText = ui->plainTextEdit->toPlainText();
     QString fWords = allText.mid(0,6); //get first 6 letter from string
     std::string utf8_text = allText.toUtf8().constData();
+
     std::string ipAdress = "192.168.100.9", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
     std::string res;
     if(fWords == "INSERT"){
 
         Parser *parser = new Parser();
-       //std::string prueba = "INSERT INTO vacaciones (lugar,tiempo) VALUES (portland,2años)";
+        //std::string prueba = "INSERT INTO vacaciones (lugar,tiempo) VALUES (portland,2años)";
         //std::string prueba = "SELECT (lugar,tiempo) FROM vacaciones WHERE CACA in (MIERDA,PEDO)"; "SELECT (name,author,year,size,description) FROM galery WHERE ";
         //std::string prueba = "DELETE FROM vacaciones WHERE lugar=portland";
         //std::string prueba = "DELETE FROM vacaciones";
@@ -36,8 +37,8 @@ void scriptwindow::on_doneButton_clicked()
             std::cout << enviar << std::endl;
             res = requests->sendPostRequest(enviar, INSERT);
         }
-        MainWindow mw;
-        mw.updated = false;
+
+        updated = false;
         QString filename = QFileDialog::getOpenFileName(
                     this,
                     tr("Open File"),
@@ -78,6 +79,7 @@ void scriptwindow::on_doneButton_clicked()
                     std::cout << enviar << std::endl;
                     requests->sendPostRequest(enviar, UPDATE);
                 }
+                updated = false;
                 close();
             }else{
 
@@ -91,9 +93,9 @@ void scriptwindow::on_doneButton_clicked()
                         requests->sendPostRequest(enviar, DELETE);
                     }
                     close();
-                }
+                    updated = false;
+                }else{
 
-                else{
                     QMessageBox::critical(this,tr("ERROR"),tr("Ingresar un sintaxis correcta"));
                     ui->plainTextEdit->clear();
                     qDebug()<<"MAMO";

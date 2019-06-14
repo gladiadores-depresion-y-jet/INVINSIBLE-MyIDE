@@ -30,6 +30,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -44,7 +45,7 @@ public:
     GaleryorImage gi;
     newphoto np;
 
-    bool updated;
+
     ptree prueba;
     ptree Galery;
     ptree ima1;
@@ -58,8 +59,15 @@ private slots:
     void on_tableWidget_cellActivated(int row, int column);
     void on_scriptButton_clicked();
 
+    void on_treeWidget_pressed(const QModelIndex &index);
+
+    void on_treeWidget_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 };
+
+static bool updated = false;
+
 
 #endif // MAINWINDOW_H

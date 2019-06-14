@@ -1,5 +1,6 @@
 #include "newgalery.h"
 #include "ui_newgalery.h"
+#include <mainwindow.h>
 
 newGalery::newGalery(QWidget *parent) :
     QDialog(parent),
@@ -32,6 +33,8 @@ void newGalery::on_doneBoton_clicked()
             std::cout << enviar << std::endl;
             requests->sendPostRequest(enviar, CREATE);
         }
+
+        updated = false;
         close();
     }
 }

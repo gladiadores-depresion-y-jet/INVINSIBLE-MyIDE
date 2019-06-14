@@ -18,6 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
+
     if(!updated){
         this->loadAll("", item);
 
@@ -231,3 +232,4 @@ void MainWindow::on_scriptButton_clicked()
     sw.setModal(true);
     sw.exec();
 }
+
