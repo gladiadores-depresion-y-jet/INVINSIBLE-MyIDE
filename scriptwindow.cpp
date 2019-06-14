@@ -27,7 +27,11 @@ void scriptwindow::on_doneButton_clicked()
 
         Parser *parser = new Parser();
         std::string prueba = "INSERT INTO vacaciones (lugar,tiempo) VALUES (portland,2años)";
+<<<<<<< HEAD
         //std::string prueba = "SELECT (lugar,tiempo) FROM vacaciones WHERE CACA in (MIERDA,PEDO)";
+=======
+        //std::string prueba = "SELECT (lugar,tiempo) FROM vacaciones WHERE CACA in (MIERDA,PEDO)"; "SELECT (name,author,year,size,description) FROM galery WHERE ";
+>>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
         //std::string prueba = "DELETE FROM vacaciones WHERE lugar=portland";
         //std::string prueba = "DELETE FROM vacaciones";
         //std::string prueba = "UPDATE vacaciones SET lugar=portland,author=david,year=2017 WHERE descripcion=hola";

@@ -23,6 +23,12 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
     std::string request;
 
     switch (resourceOfRequest) {
+        case CREATE:
+            request = "CREATE";
+            break;
+        case RESTORE:
+            request = "RESTORE";
+            break;
         case INSERT:
             request = "INSERT";
             break;

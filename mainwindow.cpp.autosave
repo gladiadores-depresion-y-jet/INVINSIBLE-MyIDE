@@ -20,11 +20,9 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 {
 
     if(!updated){
-<<<<<<< HEAD
+
         this->loadAll("", item);
-=======
-        this->load("", item);
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
+
         updated = true;
         return;
     }

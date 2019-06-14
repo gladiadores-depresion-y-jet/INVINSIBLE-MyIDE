@@ -55,7 +55,6 @@ void GaleryorImage::on_GaleriaBoton_clicked()
 {
     nG.setModal(true);
     nG.exec();
-   // nG.directory();
     choice = false;
     close();
 
