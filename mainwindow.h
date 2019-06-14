@@ -28,9 +28,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void newPhoto(QTreeWidgetItem *item, QString nombre, QString galery, int code);
+    void newPhoto(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code);
     void newGalery(QTreeWidgetItem *item, QString nombre);
-    void load(string Json, QTreeWidgetItem *item);
+    void loadAll(string Json, QTreeWidgetItem *item);
+    void loadGalery(string Json, QTreeWidgetItem *item);
+    void loadPhoto(string Json, QTreeWidgetItem *item);
+
 
     jsonmanager jm;
     GaleryorImage gi;

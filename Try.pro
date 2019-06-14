@@ -59,8 +59,7 @@ HEADERS += \
     jsonmanager.h \
     requests.h \
     resourceofrequest.h \
-
-    synthaxParser/Parser.h
+    synthaxParser/Parser.h \
 
 FORMS += \
         mainwindow.ui \
