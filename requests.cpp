@@ -24,18 +24,18 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
     std::string request;
 
     switch (resourceOfRequest) {
-        case INSERT:
-            request = "INSERT";
-            break;
-        case SELECT:
-            request = "SELECT";
-            break;
-        case UPDATE:
-            request = "UPDATE";
-            break;
-        case DELETE:
-            request = "DELETE";
-            break;
+    case INSERT:
+        request = "INSERT";
+        break;
+    case SELECT:
+        request = "SELECT";
+        break;
+    case UPDATE:
+        request = "UPDATE";
+        break;
+    case DELETE:
+        request = "DELETE";
+        break;
     }
 
     // Generate url with specified parameters

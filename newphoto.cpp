@@ -36,15 +36,6 @@ void newphoto::on_ImagenBoton_clicked()
     std::vector<char> data(buffer, buffer+int(pos));
     //pasar data a camacho
 
-
-    //Image to bytearray
-    // Preparation of our QPixmap
-   /* QByteArray bArray;
-    QBuffer buffer(&bArray);
-    buffer.open(QIODevice::ReadWrite);
-    pix.save(&buffer, "jpeg");
-    qDebug() << bArray; //print the bytearray
-    */
 }
 
 void newphoto::on_doneBoton_clicked()

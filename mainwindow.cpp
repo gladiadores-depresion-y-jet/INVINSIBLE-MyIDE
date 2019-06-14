@@ -20,8 +20,9 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 {
 
     if(!updated){
-       this->load("", item);
+        this->load("", item);
         updated = true;
+        return;
     }
 
     ui->tableWidget->setRowCount(0); //filas de la tabla igual a 0
@@ -52,20 +53,8 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
                 ui->tableWidget->setRowCount(hijos);
                 qDebug()<<hijos;
 
-                /*
-                QList<QString> list = gi.getList();
-                list.removeFirst();
-                list.removeFirst();
-                qDebug()<<list.length();
-
-                while(hijos != list.length()){
-                    list.append(nameToAdd);
-                }
-                */
-
                 for(int i = 0; i < hijos; i++){
                     //inserta 1 fila
-                    //QString wila = item->child(i)->text(0); delete
                     ui->tableWidget->setItem(i, 0, new QTableWidgetItem(item->child(i)->text(0))); //agarra los hijos del arbol y los pone en la tabla
 
                     //este paso se tiene que hacer desde la metadata que envia el server
@@ -96,12 +85,12 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
 }
 
 
-
 void MainWindow::load(string Json, QTreeWidgetItem *item){
     /*
      * Json de Garza
 */
 
+    //Crea Json
     ima1.put("name","sing");
     ima1.put("author","GARZA");
     ima1.put("year","2019");
@@ -124,6 +113,7 @@ void MainWindow::load(string Json, QTreeWidgetItem *item){
     prueba.put("NUM",1);
     prueba.put("Galery0",jsonM.ptreeToString(Galery));
 
+    //Json to String
     string valor = jsonM.ptreeToString(prueba);
     QString qstr = QString::fromStdString(valor); //string to Qstring
     qDebug()<<qstr;
@@ -133,18 +123,20 @@ void MainWindow::load(string Json, QTreeWidgetItem *item){
     for(int i = 0; i < num; i++){
         ptree jsonGalery = jm.stringToPtree(json.get<string>("Galery"+to_string(i)));
         string nodeName = jsonGalery.get<string>("Name"); //Galery's name
-        QString qstr1 = QString::fromStdString(nodeName);
+        QString galeryN = QString::fromStdString(nodeName);
 
-        newGalery(item, qstr1);
+        //add new Galery
+        newGalery(item, galeryN);
 
         int numImages = jsonGalery.get<int>("NumImages");
         for(int j = 0 ; j<numImages ; j++){
             ptree jsonImage = jm.stringToPtree(jsonGalery.get<string>("Image"+to_string(j)));
             string name = jsonImage.get<string>("name");
             int code = stoi(jsonImage.get<string>("code"));
-            QString qstr2 = QString::fromStdString(name);
+            QString photoN = QString::fromStdString(name);
 
-            newPhoto(item, qstr2, qstr1, code); //add a new child of DATABASE
+            //add new photo
+            newPhoto(item, photoN, galeryN, code); //add a new child of DATABASE
 
         }
     }
