@@ -36,7 +36,7 @@ LIBS+= -L/client/debug -fident
 INCLUDEPATH''= ../nlohmann
 LIBS+= -L../nlohmann/debug -fident
 
-INCLUDEPATH''= ../client
+INCLUDEPATH''= ../synthaxParser
 LIBS+= -L../synthaxParser/debug -fident
 
 SOURCES += \
@@ -58,7 +58,7 @@ HEADERS += \
     newphoto.h \
     jsonmanager.h \
     requests.h \
-    resourceofrequest.h \
+    ResourceOfRequest.h \
     synthaxParser/Parser.h \
 
 FORMS += \

@@ -5,6 +5,13 @@
 #include <qfiledialog.h>
 #include <QDebug>
 #include <QMessageBox>
+#include <client/Requests.h>
+#include <synthaxParser/Parser.h>
+#include <nlohmann/json.hpp>
+#include <fstream>
+#include <iostream>
+
+using nlohmann::json;
 
 namespace Ui {
 class newGalery;

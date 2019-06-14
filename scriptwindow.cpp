@@ -1,6 +1,6 @@
 #include "scriptwindow.h"
 #include "ui_scriptwindow.h"
-
+#include <mainwindow.h>
 
 scriptwindow::scriptwindow(QWidget *parent) :
     QDialog(parent),
@@ -21,17 +21,12 @@ void scriptwindow::on_doneButton_clicked()
     std::string utf8_text = allText.toUtf8().constData();
     std::string ipAdress = "192.168.100.9", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
-
+    std::string res;
     if(fWords == "INSERT"){
 
-
         Parser *parser = new Parser();
-        std::string prueba = "INSERT INTO vacaciones (lugar,tiempo) VALUES (portland,2años)";
-<<<<<<< HEAD
-        //std::string prueba = "SELECT (lugar,tiempo) FROM vacaciones WHERE CACA in (MIERDA,PEDO)";
-=======
+       //std::string prueba = "INSERT INTO vacaciones (lugar,tiempo) VALUES (portland,2años)";
         //std::string prueba = "SELECT (lugar,tiempo) FROM vacaciones WHERE CACA in (MIERDA,PEDO)"; "SELECT (name,author,year,size,description) FROM galery WHERE ";
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
         //std::string prueba = "DELETE FROM vacaciones WHERE lugar=portland";
         //std::string prueba = "DELETE FROM vacaciones";
         //std::string prueba = "UPDATE vacaciones SET lugar=portland,author=david,year=2017 WHERE descripcion=hola";
@@ -39,9 +34,10 @@ void scriptwindow::on_doneButton_clicked()
         if (!respuesta.empty()) {
             std::string enviar = respuesta.dump();
             std::cout << enviar << std::endl;
-            requests->sendPostRequest(enviar, INSERT);
+            res = requests->sendPostRequest(enviar, INSERT);
         }
-
+        MainWindow mw;
+        mw.updated = false;
         QString filename = QFileDialog::getOpenFileName(
                     this,
                     tr("Open File"),
@@ -59,6 +55,7 @@ void scriptwindow::on_doneButton_clicked()
         std::vector<char> data(buffer, buffer+int(pos));
         //pasar data a camacho  INSERT INTO vacaciones (name,author) VALUES (portland,2años)
         close();
+
     }else{
         if(fWords == "SELECT"){
             Parser *parser = new Parser();

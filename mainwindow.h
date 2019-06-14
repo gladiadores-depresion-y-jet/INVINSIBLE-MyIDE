@@ -12,9 +12,14 @@
 #include <jsonmanager.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <client/Requests.h>
+#include <synthaxParser/Parser.h>
+#include <nlohmann/json.hpp>
+#include <fstream>
+#include <iostream>
 
 using boost::property_tree::ptree;
-
+using nlohmann::json;
 
 
 namespace Ui {
@@ -39,15 +44,12 @@ public:
     GaleryorImage gi;
     newphoto np;
 
-    bool updated = false;
+    bool updated;
     ptree prueba;
     ptree Galery;
     ptree ima1;
     ptree ima2;
     jsonmanager jsonM = jsonmanager();
-
-
-
 
 
 private slots:

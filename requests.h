@@ -9,7 +9,7 @@
 #include <string>
 #include <sstream>
 #include <curl/curl.h>
-#include "resourceofrequest.h"
+#include "ResourceOfRequest.h"
 
 class Requests {
 public:

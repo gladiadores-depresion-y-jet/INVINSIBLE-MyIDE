@@ -18,6 +18,20 @@ void newGalery::on_doneBoton_clicked()
     if(ui->nameText->text() == ""){
         QMessageBox::critical(this,tr("ERROR"),tr("No hay Galeria creada")); //ventana emergente
     }else{
+        std::string galeryName = ui->nameText->text().toUtf8().constData();
+
+        std::string ipAdress = "192.168.100.9", port = "9080";
+        Requests *requests = new Requests(ipAdress, port);
+
+        Parser *parser = new Parser();
+
+        json respuesta;
+        respuesta["table"] = galeryName;
+        if (!respuesta.empty()) {
+            std::string enviar = respuesta.dump();
+            std::cout << enviar << std::endl;
+            requests->sendPostRequest(enviar, CREATE);
+        }
         close();
     }
 }

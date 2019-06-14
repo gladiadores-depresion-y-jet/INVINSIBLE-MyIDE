@@ -2,8 +2,8 @@
 // Created by david on 07/06/19.
 //
 
-#include "requests.h"
-#include <QDebug>
+#include <requests.h>
+
 
 Requests::Requests(std::string &ipAddress, std::string &port) {
     this->ipAddress = &ipAddress;
@@ -24,6 +24,12 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
     std::string request;
 
     switch (resourceOfRequest) {
+    case CREATE:
+        request = "CREATE";
+        break;
+    case RESTORE:
+        request = "RESTORE";
+        break;
     case INSERT:
         request = "INSERT";
         break;
@@ -41,6 +47,7 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
     // Generate url with specified parameters
     std::ostringstream url;
     url << "http://" << *this->ipAddress << ":" << *this->port << "/" << request;
+    std::cout << "url usado :" << url.str()  << std::endl;
 
     this->curl = curl_easy_init();
     if(this->curl) {
@@ -53,7 +60,6 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &this->readBuffer);
 
         // Perform the request, res will get the return code
-        qDebug() << "se va a enviar request ";
         this->res = curl_easy_perform(this->curl);
         std::cout << this->readBuffer << std::endl;
         /* Check for errors */

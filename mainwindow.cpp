@@ -18,13 +18,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
-
     if(!updated){
-<<<<<<< HEAD
         this->loadAll("", item);
-=======
-        this->load("", item);
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
+
         updated = true;
         return;
     }
@@ -48,55 +44,31 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
             }
         }else{
             if(item->child(0) == nullptr){ //=> Galeria esta vacia o es una foto
-                if(item->text(0)==""){
-                    string select = "SELECT (name, author, year, size, description) FROM " + string(item->text(0).toUtf8().constData());
 
-                    //mandar select
-                    //recibir json
-                    //json to string
-                    //loadPhoto(stringJson, item);
+                ui->tableWidget->setRowCount(1);
+                ui->tableWidget->setItem(0,0, new QTableWidgetItem(item->text(0)));
+                ui->tableWidget->setItem(0,1, new QTableWidgetItem(item->text(1)));
+                ui->tableWidget->setItem(0,2, new QTableWidgetItem(item->text(2)));
+                ui->tableWidget->setItem(0,3, new QTableWidgetItem(item->text(3)));
+                ui->tableWidget->setItem(0,4, new QTableWidgetItem(item->text(4)));
 
-                }else{
-                    ui->tableWidget->setRowCount(1);
-                    ui->tableWidget->setItem(0,0, new QTableWidgetItem(item->text(0)));
-                    ui->tableWidget->setItem(0,1, new QTableWidgetItem(item->text(1)));
-                    ui->tableWidget->setItem(0,2, new QTableWidgetItem(item->text(2)));
-                    ui->tableWidget->setItem(0,3, new QTableWidgetItem(item->text(3)));
-                    ui->tableWidget->setItem(0,4, new QTableWidgetItem(item->text(4)));
+                qDebug()<<item->whatsThis(0);
+                qDebug()<<item->parent()->text(0);
 
-                    qDebug()<<item->whatsThis(0);
-                    qDebug()<<item->parent()->text(0);
-                }
 
             }else{
                 int hijos = item->childCount();
                 ui->tableWidget->setRowCount(hijos);
-<<<<<<< HEAD
 
                 for(int i = 0; i < hijos; i++){
                     //inserta 1 fila
-                    if(item->child(0)->text(0)==""){
-                        string select = "SELECT (name, author, year, size, description) FROM " + string(item->text(0).toUtf8().constData());
-                        //mandar select
-                        //recibir json
-                        //json to string
-                        //loadGalery(stringJson, item);
-                    }else{
-                        ui->tableWidget->setItem(i,0, new QTableWidgetItem(item->child(i)->text(0)));
-                        ui->tableWidget->setItem(i,1, new QTableWidgetItem(item->child(i)->text(1)));
-                        ui->tableWidget->setItem(i,2, new QTableWidgetItem(item->child(i)->text(2)));
-                        ui->tableWidget->setItem(i,3, new QTableWidgetItem(item->child(i)->text(3)));
-                        ui->tableWidget->setItem(i,4, new QTableWidgetItem(item->child(i)->text(4)));
-                    }
-=======
-                qDebug()<<hijos;
 
-                for(int i = 0; i < hijos; i++){
-                    //inserta 1 fila
-                    ui->tableWidget->setItem(i, 0, new QTableWidgetItem(item->child(i)->text(0))); //agarra los hijos del arbol y los pone en la tabla
+                    ui->tableWidget->setItem(i,0, new QTableWidgetItem(item->child(i)->text(0)));
+                    ui->tableWidget->setItem(i,1, new QTableWidgetItem(item->child(i)->text(1)));
+                    ui->tableWidget->setItem(i,2, new QTableWidgetItem(item->child(i)->text(2)));
+                    ui->tableWidget->setItem(i,3, new QTableWidgetItem(item->child(i)->text(3)));
+                    ui->tableWidget->setItem(i,4, new QTableWidgetItem(item->child(i)->text(4)));
 
-                    //este paso se tiene que hacer desde la metadata que envia el server
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
                 }
             }
         }
@@ -132,16 +104,13 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
 }
 
 
-<<<<<<< HEAD
 
 void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
-=======
-void MainWindow::load(string Json, QTreeWidgetItem *item){
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
+    ui->tableWidget->clear();
     /*
      * Json de Garza
 */
-
+    /*
     //Crea Json
     ima1.put("name","sing");
     ima1.put("author","GARZA");
@@ -169,25 +138,25 @@ void MainWindow::load(string Json, QTreeWidgetItem *item){
     string valor = jsonM.ptreeToString(prueba);
     QString qstr = QString::fromStdString(valor); //string to Qstring
     qDebug()<<qstr;
-
+*/
     std::string ipAdress = "192.168.100.9", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
 
-    ptree json = jm.stringToPtree(valor);
+    std::string resp1 = "";
+    std::string res;
+    res = requests->sendPostRequest(resp1, RESTORE);
+
+    QString qstr = QString::fromStdString(res);
+    qDebug()<<qstr;
+
+    ptree json = jm.stringToPtree(res);
     int num = json.get<int>("NUM");
     for(int i = 0; i < num; i++){
         ptree jsonGalery = jm.stringToPtree(json.get<string>("Galery"+to_string(i)));
         string nodeName = jsonGalery.get<string>("Name"); //Galery's name
-<<<<<<< HEAD
         QString Pgalery = QString::fromStdString(nodeName);
 
         newGalery(item, Pgalery);
-=======
-        QString galeryN = QString::fromStdString(nodeName);
-
-        //add new Galery
-        newGalery(item, galeryN);
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
 
         int numImages = jsonGalery.get<int>("NumImages");
         for(int j = 0 ; j<numImages ; j++){
@@ -198,21 +167,14 @@ void MainWindow::load(string Json, QTreeWidgetItem *item){
             string size = jsonImage.get<string>("size");
             string description = jsonImage.get<string>("description");
             int code = stoi(jsonImage.get<string>("code"));
-<<<<<<< HEAD
 
             QString Pname = QString::fromStdString(name);
             QString Pauthor = QString::fromStdString(author);
             QString Pyear = QString::fromStdString(year);
             QString Psize = QString::fromStdString(size);
             QString Pdescription = QString::fromStdString(description);
+
             newPhoto(item, Pname, Pauthor, Pyear, Psize, Pdescription, Pgalery, code); //add a new child of DATABASE
-=======
-            QString photoN = QString::fromStdString(name);
-
-            //add new photo
-            newPhoto(item, photoN, galeryN, code); //add a new child of DATABASE
->>>>>>> b6e074daba2fc150e4d6def273e1dbc772a495ce
-
         }
     }
 
