@@ -30,9 +30,6 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
     if(column == 0){
         qDebug() << item->text(0);
 
-        //hacer request al server para desplejar informacion
-
-        //print the name of the item in column 0
         //We only have 1 column
         if(item->text(0)=="DataBase"){
             gi.setModal(true); //abre ventana de eleccion
@@ -105,56 +102,28 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
 }
 
 
-
+/**
+ * @brief reload the entire table with new metadata
+ * @param Json
+ * @param item
+ */
 void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
-    ui->tableWidget->clear();
-    /*
-     * Json de Garza
-*/
-    /*
-    //Crea Json
-    ima1.put("name","sing");
-    ima1.put("author","GARZA");
-    ima1.put("year","2019");
-    ima1.put("size","2000");
-    ima1.put("description","this is a description");
-    ima1.put("code","1");
-
-    ima2.put("name","daniel");
-    ima2.put("author","DAVID");
-    ima2.put("year","2017");
-    ima2.put("size","3000");
-    ima2.put("description","fucking shit");\
-    ima2.put("code","2");
-
-    Galery.put("NumImages",2);
-    Galery.put("Name", "Fotos");
-    Galery.put("Image0",jsonM.ptreeToString(ima1));
-    Galery.put("Image1",jsonM.ptreeToString(ima2));
-
-    prueba.put("NUM",1);
-    prueba.put("Galery0",jsonM.ptreeToString(Galery));
-
-    //Json to String
-    string valor = jsonM.ptreeToString(prueba);
-    QString qstr = QString::fromStdString(valor); //string to Qstring
-    qDebug()<<qstr;
-*/
+    ui->tableWidget->clear(); //borra la tabla
     std::string ipAdress = "192.168.100.9", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
 
     std::string resp1 = "";
-    std::string res;
-    res = requests->sendPostRequest(resp1, RESTORE);
+    std::string answer;
+    answer = requests->sendPostRequest(resp1, RESTORE);
 
-    QString qstr = QString::fromStdString(res);
+    QString qstr = QString::fromStdString(answer); //string to Qstring
     qDebug()<<qstr;
 
-    ptree json = jm.stringToPtree(res);
+    ptree json = jm.stringToPtree(answer); //string to Json
     int num = json.get<int>("NUM");
     for(int i = 0; i < num; i++){
         ptree jsonGalery = jm.stringToPtree(json.get<string>("Galery"+to_string(i)));
-        string nodeName = jsonGalery.get<string>("Name"); //Galery's name
+        std::string nodeName = jsonGalery.get<string>("Name"); //Galery's name
         QString Pgalery = QString::fromStdString(nodeName);
 
         newGalery(item, Pgalery);
@@ -162,11 +131,11 @@ void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
         int numImages = jsonGalery.get<int>("NumImages");
         for(int j = 0 ; j<numImages ; j++){
             ptree jsonImage = jm.stringToPtree(jsonGalery.get<string>("Image"+to_string(j)));
-            string name = jsonImage.get<string>("name");
-            string author = jsonImage.get<string>("author");
-            string year = jsonImage.get<string>("year");
-            string size = jsonImage.get<string>("size");
-            string description = jsonImage.get<string>("description");
+            std::string name = jsonImage.get<string>("name");
+            std::string author = jsonImage.get<string>("author");
+            std::string year = jsonImage.get<string>("year");
+            std::string size = jsonImage.get<string>("size");
+            std::string description = jsonImage.get<string>("description");
             int code = stoi(jsonImage.get<string>("code"));
 
             QString Pname = QString::fromStdString(name);
@@ -178,9 +147,13 @@ void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
             newPhoto(item, Pname, Pauthor, Pyear, Psize, Pdescription, Pgalery, code); //add a new child of DATABASE
         }
     }
-
 }
 
+/**
+ * @brief loads only a single galery
+ * @param Json
+ * @param item
+ */
 void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
 
     ptree json = jm.stringToPtree(Json);
@@ -204,7 +177,11 @@ void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
 }
 
 
-
+/**
+ * @brief loads a single photo
+ * @param Json
+ * @param item
+ */
 void MainWindow::loadPhoto(string Json, QTreeWidgetItem *item){
     ptree json = jm.stringToPtree(Json);
 

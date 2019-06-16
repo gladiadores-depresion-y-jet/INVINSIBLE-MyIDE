@@ -26,8 +26,6 @@ public:
     ~newGalery();
     QString galeryName;
     QString getName();
-    void directory();
-
     QList<QString> list;
     QList<QString> getList();
 
