@@ -30,14 +30,49 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+
+    /**
+     * crear una nueva foto para ser mostrada en la interfaz y enviada al servidor
+     * @param item del arbol de la interfaz
+     * @param name: nombre de la foto
+     * @param author: autor de la foto
+     * @param year: ano de la foto
+     * @param size: tamano de la foto
+     * @param description: descripcion de la foto
+     * @param galery: galeria donde se encuentra la foto
+     * @param code: id de la foto
+     */
     void newPhoto(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code);
+
+    /**
+     * crea una nueva galeria para ser mostrada en la interfaz y enviada al servidor
+     * @param item del arbol de la interfaz
+     * @param nombre de la galeria
+     */
     void newGalery(QTreeWidgetItem *item, QString nombre);
-    void loadAll(string Json, QTreeWidgetItem *item);
+
+    /**
+     * recarga la tabla entera con la nueva metadata
+     * @param QTreeWifgetItem, indica a cual item del arbol de la interfaz se le tiene que agregar a la metadata
+     */
+    void loadAll(QTreeWidgetItem *item);
+
+    /**
+     * @brief loads only a single galery
+     * @param Json
+     * @param item
+     */
     void loadGalery(string Json, QTreeWidgetItem *item);
+
+
+    /**
+     * @brief loads a single photo
+     * @param Json
+     * @param item
+     */
     void loadPhoto(string Json, QTreeWidgetItem *item);
 
 
@@ -45,23 +80,18 @@ public:
     GaleryorImage gi;
     newphoto np;
 
-
-    ptree prueba;
-    ptree Galery;
-    ptree ima1;
-    ptree ima2;
-    jsonmanager jsonM = jsonmanager();
-
-
 private slots:
-    void on_treeWidget_expanded(const QModelIndex &index);
+    /**
+     * funcion de doble click para desplegar nueva informacion en el arbol
+     * @param item del arbol de la interfaz
+     * @param column donde se encuentra el item seleccionado
+     */
     void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
-    void on_tableWidget_cellActivated(int row, int column);
+
+    /**
+     * boton para abrir la interfaz de los scripts
+     */
     void on_scriptButton_clicked();
-
-    void on_treeWidget_pressed(const QModelIndex &index);
-
-    void on_treeWidget_clicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

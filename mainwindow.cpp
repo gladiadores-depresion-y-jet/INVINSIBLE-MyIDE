@@ -16,11 +16,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
 
     if(!updated){
-        this->loadAll("", item);
+        this->loadAll(item);
 
         updated = true;
         return;
@@ -37,8 +38,6 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 
             if(gi.eleccion()){
                 newPhoto(item, gi.getNombreP(), gi.getAutorP(), gi.getAnoP(), gi.getTamanoP(), gi.getDescripP(), gi.getGaleryP(), 0); //add a new child of DATABASE
-                //(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code){ //add new photo to a galery
-
             }else{
                 newGalery(item, gi.getNameG());
             }
@@ -103,13 +102,7 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
     ui->treeWidget->addTopLevelItem(itm);
 }
 
-
-/**
- * @brief reload the entire table with new metadata
- * @param Json
- * @param item
- */
-void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
+void MainWindow::loadAll(QTreeWidgetItem *item){
     ui->tableWidget->clear(); //borra la tabla
     std::string ipAdress = "127.0.0.1", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
@@ -151,11 +144,6 @@ void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
     }
 }
 
-/**
- * @brief loads only a single galery
- * @param Json
- * @param item
- */
 void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
 
     ptree json = jm.stringToPtree(Json);
@@ -178,12 +166,6 @@ void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
     }
 }
 
-
-/**
- * @brief loads a single photo
- * @param Json
- * @param item
- */
 void MainWindow::loadPhoto(string Json, QTreeWidgetItem *item){
     ptree json = jm.stringToPtree(Json);
 
@@ -203,7 +185,6 @@ void MainWindow::loadPhoto(string Json, QTreeWidgetItem *item){
     newPhoto(item, Pname, Pauthor, Pyear, Psize, Pdescription, item->parent()->text(0), code); //add a new child of DATABASE
 
 }
-
 
 void MainWindow::on_scriptButton_clicked()
 {

@@ -14,9 +14,7 @@ GaleryorImage::~GaleryorImage()
     delete ui;
 }
 
-/**
- * abre el form newphoto
- */
+
 void GaleryorImage::on_FotoBoton_clicked()
 {
     if(!nG.getList().isEmpty()){
@@ -50,9 +48,6 @@ QString GaleryorImage:: getGaleryP(){
     return nf.getGalery();
 }
 
-/**
- * abre el form "newgalery"
- */
 void GaleryorImage::on_GaleriaBoton_clicked()
 {
     nG.setModal(true);

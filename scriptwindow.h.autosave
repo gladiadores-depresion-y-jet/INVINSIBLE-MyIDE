@@ -29,6 +29,9 @@ public:
     std::string image;
 
 private slots:
+    /**
+     * boton para agregar nueva metada por medio de scripts, usando la sintaxis de SQL
+     */
     void on_doneButton_clicked();
 
 private:

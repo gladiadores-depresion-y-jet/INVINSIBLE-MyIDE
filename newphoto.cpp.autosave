@@ -14,9 +14,6 @@ newphoto::~newphoto()
     delete ui;
 }
 
-/**
- * selecciona una foto en disco y la convierte a bits
- */
 void newphoto::on_ImagenBoton_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(
@@ -29,7 +26,7 @@ void newphoto::on_ImagenBoton_clicked()
     std::string filenameString = filename.toUtf8().constData(); //filename string
     ui->fotolabel->setPixmap(pix.scaled(350,350,Qt::KeepAspectRatio)); //set the image into the window
 
-    //METADATA METODO DE CAMACHO
+    //METODO DE CAMACHO
     std::ifstream ifs(filenameString, std::ios::binary|std::ios::ate);
     std::ifstream::pos_type pos = ifs.tellg();
     char* buffer = new char[pos];
@@ -40,9 +37,6 @@ void newphoto::on_ImagenBoton_clicked()
 
 }
 
-/**
- * envia una foto a la base de datos (data y metadata)
- */
 void newphoto::on_doneBoton_clicked()
 {
     if(ui->nombreText->text() != "" && ui->autorText->text() != "" && ui->anoText->text() != "" && ui->tamanoText->text() != "" && ui->descripcionText->text() != "" && ui->galeriaText->text() != ""){
@@ -55,7 +49,7 @@ void newphoto::on_doneBoton_clicked()
 
 
         //CAMBIAR METODO CON DAVID
-        std::string ipAdress = "127.0.0.1", port = "9080";
+        std::string ipAdress = "192.168.100.9", port = "9080";
         Requests *requests = new Requests(ipAdress, port);
 
         Parser *parser = new Parser();
