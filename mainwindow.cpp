@@ -36,7 +36,9 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
             gi.exec();
 
             if(gi.eleccion()){
-                newPhoto(item, gi.getNombreP(), gi.getGaleryP(),"","","","",0); //add a new child of DATABASE
+                newPhoto(item, gi.getNombreP(), gi.getAutorP(), gi.getAnoP(), gi.getTamanoP(), gi.getDescripP(), gi.getGaleryP(), 0); //add a new child of DATABASE
+                //(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code){ //add new photo to a galery
+
             }else{
                 newGalery(item, gi.getNameG());
             }

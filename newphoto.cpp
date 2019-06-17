@@ -46,12 +46,12 @@ void newphoto::on_ImagenBoton_clicked()
 void newphoto::on_doneBoton_clicked()
 {
     if(ui->nombreText->text() != "" && ui->autorText->text() != "" && ui->anoText->text() != "" && ui->tamanoText->text() != "" && ui->descripcionText->text() != "" && ui->galeriaText->text() != ""){
-        std::string nameP = nombreText->text().toUtf8().constData();
-        std::string authorP = autorText->text().toUtf8().constData();
-        std::string ageP = anoText->text().toUtf8().constData();
-        std::string sizeP = tamanoText->text().toUtf8().constData();
-        std::string descriptionP = descripcionText->text().toUtf8().constData();
-        std::string galeryName = galeriaText->text().toUtf8().constData();
+        std::string nameP = ui->nombreText->text().toUtf8().constData();
+        std::string authorP = ui->autorText->text().toUtf8().constData();
+        std::string ageP = ui->anoText->text().toUtf8().constData();
+        std::string sizeP = ui->tamanoText->text().toUtf8().constData();
+        std::string descriptionP = ui->descripcionText->text().toUtf8().constData();
+        std::string galeryName = ui->galeriaText->text().toUtf8().constData();
 
 
         //CAMBIAR METODO CON DAVID
