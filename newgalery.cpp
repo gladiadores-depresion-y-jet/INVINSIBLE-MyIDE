@@ -15,7 +15,7 @@ newGalery::~newGalery()
 }
 
 /**
- * @brief create new galery
+ * crea nueva galeria por medio de la interfaz
  */
 void newGalery::on_doneBoton_clicked()
 {
@@ -45,7 +45,7 @@ QList<QString> newGalery::getList(){
 }
 
 /**
- * @brief return galery's name
+ * devuelve el nombre de la galeria creada
  * @return
  */
 QString newGalery::getName(){

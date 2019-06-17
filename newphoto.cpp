@@ -15,7 +15,7 @@ newphoto::~newphoto()
 }
 
 /**
- * @brief select a photo and covert it to bits
+ * selecciona una foto en disco y la convierte a bits
  */
 void newphoto::on_ImagenBoton_clicked()
 {
@@ -41,7 +41,7 @@ void newphoto::on_ImagenBoton_clicked()
 }
 
 /**
- * @brief  send new photo to the datbase
+ * envia una foto a la base de datos (data y metadata)
  */
 void newphoto::on_doneBoton_clicked()
 {

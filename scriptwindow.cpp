@@ -15,7 +15,7 @@ scriptwindow::~scriptwindow()
 }
 
 /**
- * @brief SQL like dataBase manager
+ * boton para agregar nueva metada por medio de scripts, usando la sintaxis de SQL
  */
 void scriptwindow::on_doneButton_clicked()
 {
@@ -56,7 +56,9 @@ void scriptwindow::on_doneButton_clicked()
         ifs.seekg(0, std::ios::beg);
         ifs.read(buffer, pos);
         std::vector<char> data(buffer, buffer+int(pos));
-        //pasar data a camacho
+        std::string out(data.begin(), data.end());
+        ptree json = jm.stringToPtree(out);
+        //pasar json a david
         //INSERT INTO vacaciones (name,author) VALUES (portland,2años)
         close();
 
@@ -67,8 +69,14 @@ void scriptwindow::on_doneButton_clicked()
             if (!respuesta.empty()) {
                 std::string enviar = respuesta.dump();
                 std::cout << enviar << std::endl;
-                requests->sendPostRequest(enviar, SELECT);
+                image = requests->sendPostRequest(enviar, SELECT);
             }
+
+            //recibir jason de david con los bits de la imagen
+
+
+            char *act1 = new char[image.size()];
+            strncpy(act1, image.c_str(), image.size());
             close();
         }else{
             if(fWords == "UPDATE"){

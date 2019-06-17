@@ -36,7 +36,7 @@ public:
     ~MainWindow();
     void newPhoto(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code);
     void newGalery(QTreeWidgetItem *item, QString nombre);
-    void loadAll(string Json, QTreeWidgetItem *item);
+    void loadAll(QTreeWidgetItem *item);
     void loadGalery(string Json, QTreeWidgetItem *item);
     void loadPhoto(string Json, QTreeWidgetItem *item);
 

@@ -15,12 +15,11 @@ GaleryorImage::~GaleryorImage()
 }
 
 /**
-  metodo para agregar nueva image
- * @brief GaleryorImage::on_FotoBoton_clicked
+ * abre el form newphoto
  */
 void GaleryorImage::on_FotoBoton_clicked()
 {
-    if(!nG.getList().isEmpty()){ //lista para ver si hay una galeria
+    if(!nG.getList().isEmpty()){
         nf.setModal(true);
         nf.exec();
         choice = true; //boolenado para ver que opcion se tomo
@@ -51,6 +50,9 @@ QString GaleryorImage:: getGaleryP(){
     return nf.getGalery();
 }
 
+/**
+ * abre el form "newgalery"
+ */
 void GaleryorImage::on_GaleriaBoton_clicked()
 {
     nG.setModal(true);

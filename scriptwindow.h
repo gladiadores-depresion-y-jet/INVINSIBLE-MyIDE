@@ -10,6 +10,8 @@
 #include <QFileDialog>
 #include <fstream>
 #include <iostream>
+#include <jsonmanager.h>
+
 
 
 namespace Ui {
@@ -23,6 +25,8 @@ class scriptwindow : public QDialog
 public:
     explicit scriptwindow(QWidget *parent = nullptr);
     ~scriptwindow();
+    jsonmanager jm;
+    std::string image;
 
 private slots:
     void on_doneButton_clicked();
