@@ -111,7 +111,7 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
  */
 void MainWindow::loadAll(string Json, QTreeWidgetItem *item){
     ui->tableWidget->clear(); //borra la tabla
-    std::string ipAdress = "192.168.100.9", port = "9080";
+    std::string ipAdress = "127.0.0.1", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
 
     std::string resp1 = "";

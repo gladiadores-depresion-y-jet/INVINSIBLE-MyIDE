@@ -55,7 +55,7 @@ void newphoto::on_doneBoton_clicked()
 
 
         //CAMBIAR METODO CON DAVID
-        std::string ipAdress = "192.168.100.9", port = "9080";
+        std::string ipAdress = "127.0.0.1", port = "9080";
         Requests *requests = new Requests(ipAdress, port);
 
         Parser *parser = new Parser();

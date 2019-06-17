@@ -23,7 +23,7 @@ void scriptwindow::on_doneButton_clicked()
     QString fWords = allText.mid(0,6); //get first 6 letter from string
     std::string utf8_text = allText.toUtf8().constData(); //QString to string
 
-    std::string ipAdress = "192.168.100.9", port = "9080";
+    std::string ipAdress = "127.0.0.1", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
     std::string answer;
     if(fWords == "INSERT"){
