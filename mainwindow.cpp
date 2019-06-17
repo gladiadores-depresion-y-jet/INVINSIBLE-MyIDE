@@ -16,11 +16,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/**
- * funcion de doble click para desplegar nueva informacion en el arbol
- * @param item del arbol de la interfaz
- * @param column donde se encuentra el item seleccionado
- */
+
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
 
@@ -42,8 +38,6 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 
             if(gi.eleccion()){
                 newPhoto(item, gi.getNombreP(), gi.getAutorP(), gi.getAnoP(), gi.getTamanoP(), gi.getDescripP(), gi.getGaleryP(), 0); //add a new child of DATABASE
-                //(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code){ //add new photo to a galery
-
             }else{
                 newGalery(item, gi.getNameG());
             }
@@ -80,18 +74,6 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
     }
 }
 
-
-/**
- * crear una nueva foto para ser mostrada en la interfaz y enviada al servidor
- * @param item del arbol de la interfaz
- * @param name: nombre de la foto
- * @param author: autor de la foto
- * @param year: ano de la foto
- * @param size: tamano de la foto
- * @param description: descripcion de la foto
- * @param galery: galeria donde se encuentra la foto
- * @param code: id de la foto
- */
 void MainWindow::newPhoto(QTreeWidgetItem *item, QString name, QString author, QString year, QString size, QString description, QString galery, int code){ //add new photo to a galery
 
     for(int i=0; i < item->childCount(); i++){
@@ -120,11 +102,6 @@ void MainWindow::newGalery(QTreeWidgetItem *item, QString nombre){
     ui->treeWidget->addTopLevelItem(itm);
 }
 
-
-/**
- * recarga la tabla entera con la nueva metadata
- * @param QTreeWifgetItem, indica a cual item del arbol de la interfaz se le tiene que agregar a la metadata
- */
 void MainWindow::loadAll(QTreeWidgetItem *item){
     ui->tableWidget->clear(); //borra la tabla
     std::string ipAdress = "192.168.100.9", port = "9080";
@@ -167,11 +144,6 @@ void MainWindow::loadAll(QTreeWidgetItem *item){
     }
 }
 
-/**
- * @brief loads only a single galery
- * @param Json
- * @param item
- */
 void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
 
     ptree json = jm.stringToPtree(Json);
@@ -194,12 +166,6 @@ void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
     }
 }
 
-
-/**
- * @brief loads a single photo
- * @param Json
- * @param item
- */
 void MainWindow::loadPhoto(string Json, QTreeWidgetItem *item){
     ptree json = jm.stringToPtree(Json);
 
@@ -219,7 +185,6 @@ void MainWindow::loadPhoto(string Json, QTreeWidgetItem *item){
     newPhoto(item, Pname, Pauthor, Pyear, Psize, Pdescription, item->parent()->text(0), code); //add a new child of DATABASE
 
 }
-
 
 void MainWindow::on_scriptButton_clicked()
 {
