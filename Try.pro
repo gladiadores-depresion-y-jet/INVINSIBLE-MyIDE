@@ -28,6 +28,8 @@ CONFIG += c++11
 LIBS += \
        -lboost_system\
 
+
+
 LIBS += -lcurl
 
 INCLUDEPATH''= /client

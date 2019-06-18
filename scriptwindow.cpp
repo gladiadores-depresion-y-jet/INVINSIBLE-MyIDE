@@ -1,6 +1,7 @@
 #include "scriptwindow.h"
 #include "ui_scriptwindow.h"
 #include <mainwindow.h>
+#include "boost/algorithm/string.hpp"
 
 scriptwindow::scriptwindow(QWidget *parent) :
     QDialog(parent),
@@ -41,11 +42,14 @@ void scriptwindow::on_doneButton_clicked()
                     "C://",
                     "Image (*.jpeg)"
                     );
-
+        qDebug()<<filename;
         std::string filenameString = filename.toUtf8().constData();
         vector<string> input;
         boost::split(input,filenameString, boost::is_any_of("."));
         std::string ext = input.at(1);
+
+        QString shit = QString::fromStdString(ext);
+        qDebug()<<shit;
 
         //METADATA METODO DE CAMACHO
         std::ifstream ifs(filenameString, std::ios::binary|std::ios::ate);
@@ -61,14 +65,24 @@ void scriptwindow::on_doneButton_clicked()
         qDebug()<<qstr;
 
         json respuestaScript = parser->scriptTypeofRequestParser(utf8_text);
-        respuestaScript["imagen"] = out;
-        respuestaScript["ext"] = ext;
-
+        std::string temp = respuestaScript.dump();
         if (!respuestaScript.empty()) {
-            std::string enviar = respuestaScript.dump();
-            answer = requests->sendPostRequest(enviar, INSERT);
+
+            std::string answer = requests->sendPostRequest(temp, INSERT);
+            json meta = json::parse(answer);
+            std::string name = meta["id"];
+            std::string ext = meta["ext"];
+
+
+            if (answer != "false") {
+                std::ostringstream os;
+                os << name.size() << name << "." << ext;
+                std::string final = os.str();
+                std::string answer2 = requests->sendPostRequest(final, IMAGE);
+            }
         }
         updated = false;
+        close();
     }else{
 
         close();

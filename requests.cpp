@@ -2,8 +2,7 @@
 // Created by david on 07/06/19.
 //
 
-#include <requests.h>
-
+#include "requests.h"
 
 Requests::Requests(std::string &ipAddress, std::string &port) {
     this->ipAddress = &ipAddress;
@@ -24,30 +23,32 @@ std::string Requests::sendPostRequest(std::string &data, ResourceOfRequest resou
     std::string request;
 
     switch (resourceOfRequest) {
-    case CREATE:
-        request = "CREATE";
-        break;
-    case RESTORE:
-        request = "RESTORE";
-        break;
-    case INSERT:
-        request = "INSERT";
-        break;
-    case SELECT:
-        request = "SELECT";
-        break;
-    case UPDATE:
-        request = "UPDATE";
-        break;
-    case DELETE:
-        request = "DELETE";
-        break;
+        case CREATE:
+            request = "CREATE";
+            break;
+        case RESTORE:
+            request = "RESTORE";
+            break;
+        case INSERT:
+            request = "INSERT";
+            break;
+        case IMAGE:
+            request = "IMAGE";
+            break;
+        case SELECT:
+            request = "SELECT";
+            break;
+        case UPDATE:
+            request = "UPDATE";
+            break;
+        case DELETE:
+            request = "DELETE";
+            break;
     }
 
     // Generate url with specified parameters
     std::ostringstream url;
     url << "http://" << *this->ipAddress << ":" << *this->port << "/" << request;
-    std::cout << "url usado :" << url.str()  << std::endl;
 
     this->curl = curl_easy_init();
     if(this->curl) {
