@@ -73,7 +73,7 @@ public:
      * @param Json
      * @param item
      */
-    void loadPhoto(string Json, QTreeWidgetItem *item);
+    void loadPhoto(string Json);
 
 
     jsonmanager jm;

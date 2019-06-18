@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include <jsonmanager.h>
-#include <QDebug>
-#include <QString>
-
 using nlohmann::json;
 
 

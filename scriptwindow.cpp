@@ -33,13 +33,7 @@ void scriptwindow::on_doneButton_clicked()
         //std::string prueba = "DELETE FROM vacaciones WHERE lugar=portland";
         //std::string prueba = "DELETE FROM vacaciones";
         //std::string prueba = "UPDATE vacaciones SET lugar=portland,author=david,year=2017 WHERE descripcion=hola";
-        json respuesta = parser->scriptTypeofRequestParser(utf8_text);
-        if (!respuesta.empty()) {
-            std::string enviar = respuesta.dump();
-            std::cout << enviar << std::endl;
-            answer = requests->sendPostRequest(enviar, INSERT);
-        }
-        updated = false;
+
 
         QString filename = QFileDialog::getOpenFileName(
                     this,
@@ -57,21 +51,31 @@ void scriptwindow::on_doneButton_clicked()
         ifs.read(buffer, pos);
         std::vector<char> data(buffer, buffer+int(pos));
         std::string out(data.begin(), data.end());
-        ptree json = jm.stringToPtree(out);
-        //pasar json a david
-        //INSERT INTO vacaciones (name,author) VALUES (portland,2años)
+
+        json respuestaScript = parser->scriptTypeofRequestParser(utf8_text);
+        respuestaScript["imagen"] = out;
+
+        if (!respuestaScript.empty()) {
+            std::string enviar = respuestaScript.dump();
+            std::cout << enviar << std::endl;
+            answer = requests->sendPostRequest(enviar, INSERT);
+        }
+        updated = false;
+
         close();
 
     }else{
         if(fWords == "SELECT"){
             Parser *parser = new Parser();
             json respuesta = parser->scriptTypeofRequestParser(utf8_text);
+            std::cout << respuesta.dump() << std::endl;
             if (!respuesta.empty()) {
                 std::string enviar = respuesta.dump();
                 std::cout << enviar << std::endl;
                 image = requests->sendPostRequest(enviar, SELECT);
             }
-
+            MainWindow mw;
+            //mw.loadPhoto(image);
             //recibir jason de david con los bits de la imagen
 
 

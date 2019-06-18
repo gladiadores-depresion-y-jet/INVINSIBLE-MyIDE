@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -166,23 +167,40 @@ void MainWindow::loadGalery(string Json, QTreeWidgetItem *item){
     }
 }
 
-void MainWindow::loadPhoto(string Json, QTreeWidgetItem *item){
+void MainWindow::loadPhoto(string Json){
+    qDebug("ak7");
     ptree json = jm.stringToPtree(Json);
 
     //ptree jsonImage = jm.stringToPtree(jsonGalery.get<string>("Image"+to_string(0)));
-    string name = json.get<string>("name");
-    string author = json.get<string>("author");
-    string year = json.get<string>("year");
-    string size = json.get<string>("size");
-    string description = json.get<string>("description");
-    int code = stoi(json.get<string>("code"));
 
-    QString Pname = QString::fromStdString(name);
-    QString Pauthor = QString::fromStdString(author);
-    QString Pyear = QString::fromStdString(year);
-    QString Psize = QString::fromStdString(size);
-    QString Pdescription = QString::fromStdString(description);
-    newPhoto(item, Pname, Pauthor, Pyear, Psize, Pdescription, item->parent()->text(0), code); //add a new child of DATABASE
+    ptree imagesJson = this->jm.stringToPtree(json.get<string>("IMAGES"));
+
+    for(int i = 0 ; i<json.get<int>("NUM") ; i++){
+
+        ptree image = this->jm.stringToPtree(imagesJson.get<string>("Image"+to_string(i)));
+
+        string name = image.get<string>("name");
+        string author = image.get<string>("author");
+        string year = image.get<string>("year");
+        string size = image.get<string>("size");
+        string description = image.get<string>("description");
+        int code = image.get<int>("code");
+
+
+        QString Pname = QString::fromStdString(name);
+        QString Pauthor = QString::fromStdString(author);
+        QString Pyear = QString::fromStdString(year);
+        QString Psize = QString::fromStdString(size);
+        QString Pdescription = QString::fromStdString(description);
+
+        ui->tableWidget->setRowCount(1);
+        ui->tableWidget->setItem(0,0, new QTableWidgetItem(Pname));
+        ui->tableWidget->setItem(0,1, new QTableWidgetItem(Pauthor));
+        ui->tableWidget->setItem(0,2, new QTableWidgetItem(Pyear));
+        ui->tableWidget->setItem(0,3, new QTableWidgetItem(Psize));
+        ui->tableWidget->setItem(0,4, new QTableWidgetItem(Pdescription));
+    }
+
 
 }
 
