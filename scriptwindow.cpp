@@ -23,7 +23,7 @@ void scriptwindow::on_doneButton_clicked()
     QString fWords = allText.mid(0,6); //get first 6 letter from string
     std::string utf8_text = allText.toUtf8().constData(); //QString to string
 
-    std::string ipAdress = "127.0.0.1", port = "9080";
+    std::string ipAdress = "192.168.100.2", port = "9080";
     Requests *requests = new Requests(ipAdress, port);
     std::string answer;
     if(fWords == "INSERT"){
@@ -40,8 +40,12 @@ void scriptwindow::on_doneButton_clicked()
                     tr("Open File"),
                     "C://",
                     "Image (*.jpeg)"
-                    ); //opens .jpeg files only
+                    );
+
         std::string filenameString = filename.toUtf8().constData();
+        vector<string> input;
+        boost::split(input,filenameString, boost::is_any_of("."));
+        std::string ext = input.at(1);
 
         //METADATA METODO DE CAMACHO
         std::ifstream ifs(filenameString, std::ios::binary|std::ios::ate);
@@ -52,19 +56,23 @@ void scriptwindow::on_doneButton_clicked()
         std::vector<char> data(buffer, buffer+int(pos));
         std::string out(data.begin(), data.end());
 
+
+        QString qstr = QString::fromStdString(out);
+        qDebug()<<qstr;
+
         json respuestaScript = parser->scriptTypeofRequestParser(utf8_text);
         respuestaScript["imagen"] = out;
+        respuestaScript["ext"] = ext;
 
         if (!respuestaScript.empty()) {
             std::string enviar = respuestaScript.dump();
-            std::cout << enviar << std::endl;
             answer = requests->sendPostRequest(enviar, INSERT);
         }
         updated = false;
+    }else{
 
         close();
 
-    }else{
         if(fWords == "SELECT"){
             Parser *parser = new Parser();
             json respuesta = parser->scriptTypeofRequestParser(utf8_text);
